@@ -4,13 +4,13 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from settings import CRYPTOPANIC_API_KEY
 
 analyser = SentimentIntensityAnalyzer()
-search_term = "BTG"
+search_term = "BCH"
 total_score = 0
 total_results = 0
 custom_negative_words = ["sell", "tanked",
-                         "tanking", "price is down", "bubble"]
+                         "tanking", "price is down", "bubble", "through support"]
 custom_positive_words = ["moon", "lambo", "mooon", "breaks", "adopting",
-                         "mooning", "moooon", "fuck yeah", "buy", "ath", "price is up", "surges", "broke"]
+                         "mooning", "moooon", "fuck yeah", "buy", "ath", "price is up", "surges", "broke", u"\U0001F680"]
 start_url = 'http://cryptopanic.com/api/posts/?auth_token={0}&currency={1}&filter=trending'.format(
     CRYPTOPANIC_API_KEY, search_term)
 
@@ -26,9 +26,12 @@ def parse_titles(array):
         title = headline['title']
         votes = headline['votes']
         # print(title)
+        # print(votes)
         if votes['negative'] > votes['positive'] or any(ext in title.lower() for ext in custom_negative_words):
+            # print('bad')
             total_score = total_score + -1
         elif votes['positive'] > votes['negative'] or any(ext in title.lower() for ext in custom_positive_words):
+            # print('good')
             total_score = total_score + 1
         else:
             total_score = total_score + sentiment_scores(headline['title'])
