@@ -4,7 +4,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from settings import CRYPTOPANIC_API_KEY
 
 analyser = SentimentIntensityAnalyzer()
-search_term = "ETH"
+search_term = "poop"
 total_score = 0
 total_results = 0
 custom_negative_words = ["sell", "tanked",
