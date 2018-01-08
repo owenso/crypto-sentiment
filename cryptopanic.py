@@ -4,7 +4,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from settings import CRYPTOPANIC_API_KEY
 
 analyser = SentimentIntensityAnalyzer()
-search_term = "BCH"
+search_term = "QSP"
 total_score = 0
 total_results = 0
 custom_negative_words = ["sell", "tanked",
@@ -21,11 +21,11 @@ def sentiment_scores(sentence):
 
 def parse_titles(array):
     global total_score
-    print(total_score)
+    # print(total_score)
     for headline in array:
         title = headline['title']
         votes = headline['votes']
-        # print(title)
+        print(title)
         # print(votes)
         if votes['negative'] > votes['positive'] or any(ext in title.lower() for ext in custom_negative_words):
             # print('bad')
